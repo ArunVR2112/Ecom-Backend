@@ -1,66 +1,79 @@
 package com.ecom.commercial.E_Commerrce.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-public class UserInfo 
-{
-	@Id
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String name;
-	@Column(unique = true)
-	private String email;
-	private String password;
-	private String confirmPassword;
-	
-	public String getName() {
-		return name;
-	}
+public class UserInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    @Column(unique = true)
+    private String email;
+    private String password;
+    private String confirmPassword;
+    
+    @OneToMany(mappedBy = "userInfo")
+    private List<CartItem> cartItem;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public UserInfo() {}
 
-	public String getEmail() {
-		return email;
-	}
+    public UserInfo(long id, String name, String email, String password, String confirmPassword) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    // Getters and Setters
 
-	public String getPassword() {
-		return password;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public UserInfo(String name, String email, String password, String confirmPassword) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.confirmPassword = confirmPassword;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public UserInfo() {
-		// TODO Auto-generated constructor stub
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public List<CartItem> getCartItem() {
+        return cartItem;
+    }
+
+    public void setCartItem(List<CartItem> cartItem) {
+        this.cartItem = cartItem;
+    }
 }
