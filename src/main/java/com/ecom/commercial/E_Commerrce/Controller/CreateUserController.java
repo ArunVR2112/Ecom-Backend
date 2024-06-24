@@ -66,7 +66,7 @@ public class CreateUserController {
 		
 		
 		
-		@GetMapping({"/loginUser"})
+		@GetMapping({"/login"})
 		public String logInUser(Model model) {
 			
 			return "login";
