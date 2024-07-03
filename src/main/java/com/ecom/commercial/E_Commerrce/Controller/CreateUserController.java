@@ -57,21 +57,15 @@ public class CreateUserController {
         }
     }
 
-		@GetMapping({"api/{id}"})
-		public ResponseEntity<UserInfo> getUsers(@PathVariable("id") long id) {
-			
-			return new ResponseEntity<UserInfo>(serviceClass.getUser(id),HttpStatus.OK);
-			
-		}
+//		@GetMapping({"api/{id}"})
+//		public ResponseEntity<UserInfo> getUsers(@PathVariable("id") long id) {
+//			
+//			return new ResponseEntity<UserInfo>(serviceClass.getUser(id),HttpStatus.OK);
+//			
+//		}
 		
 		
-		
-		@GetMapping({"/login"})
-		public String logInUser(Model model) {
-			
-			return "login";
-			
-		}
+
 	
 }
 

@@ -1,5 +1,7 @@
 package com.ecom.commercial.E_Commerrce.Services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ecom.commercial.E_Commerrce.Model.CartItem;
@@ -7,17 +9,11 @@ import com.ecom.commercial.E_Commerrce.Model.CartItem;
 @Service
 public interface CartItemService 
 {
+
+    CartItem saveToCart(CartItem cartItem);
+    
+  
+	List<CartItem> getAllCartItems(Long userId);
 	
-	//Get cart Items
-	CartItem getItems(Long cartId);
-	
-	
-	//Delete Cart
-	void deleteItem(Long cartId);
-	
-	//Add Cart to database
-	CartItem saveToCart(CartItem cartItem);
-	
-	//Update CartItem's	
-	CartItem updateCart(CartItem cartItem);
+	void deleteCartItems(Long cartUtemId);
 }

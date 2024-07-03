@@ -1,39 +1,46 @@
 package com.ecom.commercial.E_Commerrce.Services.Implements;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ecom.commercial.E_Commerrce.Model.CartItem;
-import com.ecom.commercial.E_Commerrce.Repository.cartrepos.CartRepository;
+import com.ecom.commercial.E_Commerrce.Model.UserInfo;
+import com.ecom.commercial.E_Commerrce.Repository.CartRepository;
+import com.ecom.commercial.E_Commerrce.Repository.UserRepository;
 import com.ecom.commercial.E_Commerrce.Services.CartItemService;
 
 @Service
-public class CartItemServiceImplementation implements CartItemService{
-	
-	@Autowired
-	private CartRepository cartRepository;
+public class CartItemServiceImplementation implements CartItemService {
 
-	@Override
-	public CartItem getItems(Long cartId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Autowired
+    private CartRepository cartRepository;
 
-	@Override
-	public void deleteItem(Long cartId) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Autowired
+    private UserRepository userRepository;
 
-	@Override
-	public CartItem saveToCart(CartItem cartItem) {
-		return cartRepository.save(cartItem);
-	}
+    @Override
+    @Transactional
+    public CartItem saveToCart(CartItem cartItem) {
+        UserInfo userInfo = cartItem.getUserInfo();
+        if (userInfo != null && userInfo.getUserinfoid() == 0) {
+            // Persist UserInfo first if not already persisted
+            userInfo = userRepository.save(userInfo);
+            cartItem.setUserInfo(userInfo);
+        }
+        return cartRepository.save(cartItem);
+    }
 
-	@Override
-	public CartItem updateCart(CartItem cartItem) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<CartItem> getAllCartItems(Long userId) {
+        return cartRepository.findByUserInfoUserInfoId(userId);
+    }
+    
+    @Override
+    public void deleteCartItems(Long cartItemId) {
+    	
+    }
 
 }

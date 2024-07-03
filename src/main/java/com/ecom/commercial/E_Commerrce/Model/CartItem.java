@@ -10,36 +10,32 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name = "cart_items")
+@Table(name = "cartitems")
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "cart_item_id_seq", initialValue = 5, allocationSize = 100)
+@SequenceGenerator(name = "cartitemidseq", initialValue = 5, allocationSize = 100)
 public class CartItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_item_id_seq")
-    private long item_id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cartitemidseq")
+    private long itemId;
+    
+    private long cartItemId;
+    private String itemTitle;
 
-    private String item_title;
-
-    private String item_quantity;
+    private String itemQuantity;
 
     private long price;
 
     private LocalDateTime createDateTime;
 
     @ManyToOne
-    @JoinColumn(name = "user_info_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "userinfoid", nullable = false)
     private UserInfo userInfo;
 }
