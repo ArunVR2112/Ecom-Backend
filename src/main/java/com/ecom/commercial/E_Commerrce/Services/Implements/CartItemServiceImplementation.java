@@ -40,6 +40,9 @@ public class CartItemServiceImplementation implements CartItemService {
     
     @Override
     public void deleteCartItems(Long cartItemId) {
+    	CartItem cartItem= cartRepository.findByCartItemId(cartItemId);
+    	
+    	cartRepository.deleteById(cartItem.getItemId());
     	
     }
 
