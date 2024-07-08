@@ -13,6 +13,6 @@ public interface CartRepository extends JpaRepository<CartItem, Long> {
     @Query("select c from CartItem c where c.userInfo.userinfoid = :userId")
     List<CartItem> findByUserInfoUserInfoId(@Param("userId") Long userId);
     
-    @Query("select a from CartItem a where a.cartItemId= :cartitemid")
-    CartItem findByCartItemId(Long cartitemid);
+    @Query("select a from CartItem a where a.cartItemId = :cartitemid and a.userInfo.userinfoid = :CurrenUserInfoId")
+    CartItem findByCartItemId(@Param("cartitemid") Long cartitemid,@Param("CurrenUserInfoId") Long CurrenUserInfoId);
 }

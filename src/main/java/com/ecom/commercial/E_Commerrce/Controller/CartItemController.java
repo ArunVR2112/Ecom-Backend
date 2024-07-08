@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,17 +27,31 @@ public class CartItemController {
     private CartItemService cartItemService;
     
     
-//    I have to edit this later on for now living as it is
+
     
     @PostMapping("/cart/items")
     public ResponseEntity<CartItem> addToCart(@RequestBody CartItem cartItem) {
-       if(cartItem.getCartItemId()==0) {
-    	   CartItem savedCartItem = cartItemService.saveToCart(cartItem);
-           return ResponseEntity.ok(savedCartItem);
-       }
-       return (ResponseEntity<CartItem>) ResponseEntity.badRequest();
+    	long cartItemId=cartItem.getCartItemId();
+     	long currentUserInfoId=cartItem.getUserInfo().getUserinfoid();
+
+    	CartItem presentCart=cartItemService.getCartItemById(cartItemId,currentUserInfoId);
+   
+    	if(presentCart.getCartItemId()==cartItemId && currentUserInfoId==presentCart.getUserInfo().getUserinfoid()) {
+    	
+    		return updateCart(cartItemId,currentUserInfoId,cartItem.getItemQuantity());
+    		
+    	}
+    	CartItem savedCartItem = cartItemService.saveToCart(cartItem);
+        return ResponseEntity.ok(savedCartItem);
+    	
+    	
     }
 
+    
+    
+    
+    
+    
     @GetMapping("/cart/items/{userId}")
     public ResponseEntity<List<CartItem>> getAllCartItems(@PathVariable Long userId) {
         List<CartItem> cartItems = cartItemService.getAllCartItems(userId);
@@ -45,10 +60,27 @@ public class CartItemController {
     }
     
     
-//    Deleting the one item entirly from table
-    @DeleteMapping("/del/{id}")
-	public ResponseEntity<String> delete(@PathVariable("id") long id){
-    	cartItemService.deleteCartItems(id);
-		return new ResponseEntity<String>("cart item Deleted Succesfully",HttpStatus.OK);
-	}
+
+    @DeleteMapping("/del/{id}/{currenUserInfoId}")
+    public ResponseEntity<String> delete(@PathVariable("id") long id, @PathVariable("currenUserInfoId") long currenUserInfoId) {
+        cartItemService.deleteCartItems(id, currenUserInfoId);
+        return new ResponseEntity<>("Cart item deleted successfully", HttpStatus.OK);
+    }
+
+
+    @PutMapping("/cart/update/{id}/{currenUserInfoId}/{quantity}")
+    public ResponseEntity<CartItem> updateCart(
+            @PathVariable("id") long id,
+            @PathVariable("currenUserInfoId") long currenUserInfoId,
+            @PathVariable("quantity") String quantity) {
+      
+        // Assuming you have proper validation and parsing of 'quantity' in your service
+        CartItem updatedCartItem = cartItemService.updateCartItemQnty(id, currenUserInfoId, quantity);
+        
+        if (updatedCartItem != null) {
+            return ResponseEntity.ok(updatedCartItem); // Return 200 OK with updated cart item
+        } else {
+            return ResponseEntity.notFound().build(); // Return 404 Not Found if cart item not found
+        }
+    }
 }

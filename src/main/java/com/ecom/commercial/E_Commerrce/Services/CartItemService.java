@@ -15,6 +15,10 @@ public interface CartItemService
   
 	List<CartItem> getAllCartItems(Long userId);
 	
-	void deleteCartItems(Long cartUtemId);
+	void deleteCartItems(Long cartUtemId,Long currenUserInfoId);
 	
+	
+	CartItem updateCartItemQnty(Long cartItemId,Long currenUserInfoId,String qnt);
+	
+	 CartItem getCartItemById(Long cartItemId,Long currentUserInfoId);
 }
