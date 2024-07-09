@@ -1,6 +1,5 @@
 package com.ecom.commercial.E_Commerrce.Model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,11 +23,10 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userinfoid;
     private String name;
-    @Column(unique = true)
+   
     private String email;
     private String password;
     private String mobileno;
 
 
-    
 }

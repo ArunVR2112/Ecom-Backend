@@ -35,9 +35,11 @@ public class CreateUserController {
 		}
 		//	Save User Api
 		@PostMapping("/api")
-		public ResponseEntity<UserInfo> saveUsers(@RequestBody UserInfo userInfo) {
+		public ResponseEntity<String> saveUsers(@RequestBody UserInfo userInfo) {
 			
-			return new ResponseEntity<UserInfo>(serviceClass.saveUsers(userInfo),HttpStatus.OK);
+			serviceClass.saveUsers(userInfo);
+			
+			return new ResponseEntity<String>("User Created Successfully !",HttpStatus.OK);
 		}
 	
 		// User Login Related Codes
