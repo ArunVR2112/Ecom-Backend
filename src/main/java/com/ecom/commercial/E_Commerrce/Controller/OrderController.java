@@ -30,20 +30,19 @@ public class OrderController {
 
     @PostMapping("/api/v1/user/order/placed/")
     public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
-        // Fetch and validate UserInfo
-    	System.err.println(order.getUserInfo().getUserinfoid());
+       
+    
         UserInfo userInfo = userInfoService.getUserInfoById(order.getUserInfo().getUserinfoid())
                 .orElseThrow(() -> new ResourceNotFoundExecption("UserInfo", "id", order.getUserInfo().getUserinfoid()));
 
-        // Fetch and validate Address
+        
         Address address = addressService.getAddressById(order.getAddress().getId())
                 .orElseThrow(() -> new ResourceNotFoundExecption("Address", "id", order.getAddress().getId()));
 
-        // Set fetched entities
+      
         order.setUserInfo(userInfo);
         order.setAddress(address);
-
-        // Save Order
+       
         Order ordersaved;
         try {
             ordersaved = orderServices.placeOrder(order);
