@@ -1,5 +1,7 @@
 package com.ecom.commercial.E_Commerrce.Services;
 
+import java.util.Optional;
+
 import com.ecom.commercial.E_Commerrce.Model.UserInfo;
 
 public interface UserServiceClass {
@@ -9,7 +11,7 @@ public interface UserServiceClass {
 	
 	UserInfo getUser(long id);
 	
-	void deleteUser(long id);
-	
+
+	Optional<UserInfo> getUserInfoById(long id);
 
 }

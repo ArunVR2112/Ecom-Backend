@@ -2,6 +2,7 @@ package com.ecom.commercial.E_Commerrce.Services.Implements;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,10 @@ public class AddressServicesImplementation implements AddressServices {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	@Override
+	public Optional<Address> getAddressById(long id) {
+        return addressRepository.findById(id);
+    }
 	@Override
 	public void deleteAddress(Long userid,Long addId) {
 		List<Address> allAddresses =addressRepository.findByUserId(userid);

@@ -29,14 +29,17 @@ public class Order {
 	@Id
 	@Column(name = "orderid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	
-	private long cartItemId;
+	private long id;	
+
 	@Column(name="orderdate")
 	private LocalDateTime orderDate;
+	
 
 	@ManyToOne
+	@JoinColumn(name="addressId",nullable = false)
+	private Address address;
+	
+    @ManyToOne
     @JoinColumn(name = "userinfoid", nullable = false)
-    private UserInfo userInfoId;
+    private UserInfo userInfo;
 }

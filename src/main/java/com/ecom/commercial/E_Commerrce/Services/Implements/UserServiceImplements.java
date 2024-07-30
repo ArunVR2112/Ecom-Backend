@@ -2,6 +2,7 @@ package com.ecom.commercial.E_Commerrce.Services.Implements;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ecom.commercial.E_Commerrce.CustomException.ResourceNotFoundExecption;
@@ -12,6 +13,7 @@ import com.ecom.commercial.E_Commerrce.Services.UserServiceClass;
 @Service
 public class UserServiceImplements implements UserServiceClass{
 	
+	@Autowired
 	private UserRepository repo;
 
 	public UserServiceImplements(UserRepository repo) {
@@ -47,13 +49,8 @@ public class UserServiceImplements implements UserServiceClass{
 		}
 
 	}
-	
-//	Delete User Permantely
 	@Override
-	public void deleteUser(long id) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
+	public Optional<UserInfo> getUserInfoById(long id) {
+        return repo.findById(id);
+    }
 }
