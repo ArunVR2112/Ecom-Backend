@@ -1,8 +1,11 @@
 package com.ecom.commercial.E_Commerrce.Services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ecom.commercial.E_Commerrce.Model.Admin;
+import com.ecom.commercial.E_Commerrce.Model.UserInfo;
 
 @Service
 public interface AdminServices {
@@ -14,6 +17,20 @@ public interface AdminServices {
 //	get admin data from db
 	
 	Admin getAdmin(Admin admin);
+	
+	
+//	get all Customers
+	
+	List<UserInfo> getAllUSerINfo(UserInfo info);
+	
+//	update admin
+	
+	
+//Delete Admin permantly
+	
+	
+//	assign task to lower admins
+	
 	
 	
 }
