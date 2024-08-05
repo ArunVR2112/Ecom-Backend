@@ -13,5 +13,7 @@ public interface UserServiceClass {
 	
 
 	Optional<UserInfo> getUserInfoById(long id);
+	
+	UserInfo updateUserInfo(UserInfo userInfo);
 
 }

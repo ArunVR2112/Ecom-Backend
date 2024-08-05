@@ -11,7 +11,7 @@ import com.ecom.commercial.E_Commerrce.Model.UserInfo;
 public interface AdminServices {
 
 //	Save Admin Data in db
-	Admin createAdmin(Admin admin);
+	boolean createAdmin(Admin admin);
 	
 	
 //	get admin data from db

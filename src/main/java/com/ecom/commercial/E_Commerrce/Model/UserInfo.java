@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,5 +30,8 @@ public class UserInfo {
     private String password;
     private String mobileno;
 
-
+	@OneToOne
+	@JoinColumn(name="role_id",referencedColumnName = "roleId",nullable = false)
+	private Roles roles;
+	
 }

@@ -1,17 +1,21 @@
 package com.ecom.commercial.E_Commerrce.Model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 
 
 @Data
 @Entity
-public class Admin {
+public class Admin extends BaseEntity{
 	
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +35,9 @@ public class Admin {
 	
 	@Column(name="admin_password",nullable = false)
 	private String password;
-	
-	
+//	
+//    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, targetEntity = Roles.class)
+//    @JoinColumn(name = "role_id", referencedColumnName = "roleId",nullable = false)
+//    private Roles roles;
 	
 }

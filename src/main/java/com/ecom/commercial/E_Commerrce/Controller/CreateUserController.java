@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +35,8 @@ public class CreateUserController {
 			this.serviceClass = serviceClass;
 		}
 		//	Save User Api
-		@PostMapping("/api")
+		
+		@PostMapping("/api/userData")
 		public ResponseEntity<String> saveUsers(@RequestBody UserInfo userInfo) {
 			
 			serviceClass.saveUsers(userInfo);
@@ -57,17 +59,17 @@ public class CreateUserController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password"); // Return 401 Unauthorized
         }
-    }
-
-//		@GetMapping({"api/{id}"})
-//		public ResponseEntity<UserInfo> getUsers(@PathVariable("id") long id) {
-//			
-//			return new ResponseEntity<UserInfo>(serviceClass.getUser(id),HttpStatus.OK);
-//			
-//		}
+    	}
+	
+	//Adding Update USer 
+	@PutMapping("/api/update/user/")
+	public UserInfo updateUser(@RequestBody UserInfo userInfo ) {
 		
+		return userInfo;
 		
+	}
 
+	
 	
 }
 
